@@ -1,6 +1,9 @@
-@extends('layouts.guest')
+<!-- resources/views/welcome.blade.php -->
+@extends('layouts.app')
 
-@section('main-content')
+@section('title', 'Benvenuto')
+
+@section('content')
     <div class="row">
         <div class="col">
             <div class="card">
@@ -9,7 +12,9 @@
                         Welcome!
                     </h1>
                     <br>
-                    La welcome page è una pagina pubblica (NON protetta)
+                    La welcome page è una pagina pubblica (NON protetta).
+                    <br>
+                    <a href="{{ route('login') }}">Login</a> o <a href="{{ route('register') }}">Registrati</a> per accedere.
                 </div>
             </div>
         </div>

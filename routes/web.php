@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// Controllers
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\Admin\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +16,17 @@ use App\Http\Controllers\Admin\MainController as AdminMainController;
 |
 */
 
+// Rotta per la pagina di welcome pubblica
 Route::get('/', [MainController::class, 'index'])->name('home');
 
-Route::prefix('admin')
-    ->name('admin.')
-    ->middleware('auth')
-    ->group(function () {
-
+// Rotte protette per l'admin, accessibili solo dopo il login
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard che reindirizza alla pagina dei progetti
     Route::get('/dashboard', [AdminMainController::class, 'dashboard'])->name('dashboard');
 
+    // CRUD per i progetti del portfolio
+    Route::resource('projects', ProjectController::class);
 });
 
+// Rotte di autenticazione
 require __DIR__.'/auth.php';

@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-
     public function dashboard()
     {
-        return view('admin.dashboard');
+        // Reindirizza alla lista dei progetti (pagina principale del portfolio)
+        return redirect()->route('admin.projects.index');
     }
-
 }

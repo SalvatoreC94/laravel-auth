@@ -1,22 +1,20 @@
 <?php
 
-namespace Database\Seeders;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-class DatabaseSeeder extends Seeder
+public function run(): void
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // \App\Models\User::factory(10)->create();
+    // Creazione di un utente predefinito
+    User::firstOrCreate(
+        ['email' => 'user@example.com'],
+        [
+            'name' => 'user',
+            'password' => Hash::make('password'), // Assicurati che la password sia crittografata
+        ]
+    );
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-    }
+    // Chiama il seeder per i progetti
+    $this->call(ProjectSeeder::class);
 }
+
